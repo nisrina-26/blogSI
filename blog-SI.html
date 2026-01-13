@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Pribadi - SI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: 'hsl(var(--background))',
+                        foreground: 'hsl(var(--foreground))',
+                        primary: {
+                            DEFAULT: 'hsl(var(--primary))',
+                            foreground: 'hsl(var(--primary-foreground))',
+                        },
+                        secondary: {
+                            DEFAULT: 'hsl(var(--secondary))',
+                            foreground: 'hsl(var(--secondary-foreground))',
+                        },
+                        muted: {
+                            DEFAULT: 'hsl(var(--muted))',
+                            foreground: 'hsl(var(--muted-foreground))',
+                        },
+                        border: 'hsl(var(--border))',
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        /* Custom styles untuk mensimulasikan Shadcn UI theme */
+        :root {
+            --background: 0 0% 100%;
+            --foreground: 222.2 84% 4.9%;
+            --primary: 221.2 83.2% 53.3%;
+            --primary-foreground: 210 40% 98%;
+            --secondary: 210 40% 96%;
+            --secondary-foreground: 222.2 84% 4.9%;
+            --muted: 210 40% 96%;
+            --muted-foreground: 215.4 16.3% 46.9%;
+            --border: 214.3 31.8% 91.4%;
+        }
+
+        .card {
+            border: 1px solid hsl(var(--border));
+            border-radius: 0.5rem;
+            background: hsl(var(--background));
+        }
+
+        .card-header {
+            padding: 1.25rem;
+            border-bottom: 1px solid hsl(var(--border));
+        }
+
+        .card-content {
+            padding: 1.25rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-default {
+            background-color: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+            border: 1px solid hsl(var(--primary));
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: hsl(var(--foreground));
+            border: 1px solid hsl(var(--border));
+        }
+
+        .btn-default:hover {
+            background-color: hsl(var(--primary)/0.9);
+        }
+
+        .btn-outline:hover {
+            background-color: hsl(var(--secondary));
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-background text-foreground font-sans">
+    <!-- Header -->
+    <header class="bg-primary text-primary-foreground py-6 px-4 shadow-md">
+        <div class="container mx-auto">
+            <h1 class="text-3xl font-bold">Blog Pribadi</h1>
+            <p class="text-white mt-2"> Sharing pengetahuan tentang Sistem Informasi </p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-secondary py-4 px-4 sticky top-0 z-10 shadow-sm">
+        <div class="container mx-auto flex gap-4 justify-center">
+            <button 
+                class="btn btn-default transition-all duration-200"
+                onclick="switchTab('profile')"
+                id="btn-profile"
+            >
+                Profil
+            </button>
+            <button 
+                class="btn btn-outline transition-all duration-200"
+                onclick="switchTab('articles')"
+                id="btn-articles"
+            >
+                Artikel
+            </button>
+            <button 
+                class="btn btn-outline transition-all duration-200"
+                onclick="switchTab('contact')"
+                id="btn-contact"
+            >
+                Kontak
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto py-8 px-4">
+        <!-- Profile Section -->
+        <div id="profile-section" class="content-section active max-w-4xl mx-auto">
+            <div class="card mb-8">
+                <div class="card-header text-center">
+                    <div class="mx-auto mb-4">
+                        <img 
+                            src="myprofil.JPG" 
+                            alt="Foto profil penulis blog dengan latar belakang netral" 
+                            class="w-32 h-32 rounded-full mx-auto object-cover border-4 border-primary"
+                        />
+                    </div>
+                    <h2 class="text-2xl font-bold text-foreground">Nisrina Zulfa Rizqiyani</h2>
+                    <p class="text-muted-foreground">Mahasiswa Teknik Informatika | Blogger SI</p>
+                </div>
+                <div class="card-content space-y-4">
+                    <p class="text-foreground">
+                        Halo! Saya Nisrina Zulfa, seorang mahasiswa Teknik Informatika yang passionate tentang teknologi informasi dan perkembangan digital. 
+                        Saya membuat blog ini untuk berbagi pengetahuan dan pengalaman selama menempuh pendidikan di bidang Sistem Informasi.
+                    </p>
+                    <p class="text-foreground">
+                        Blog ini berisi ringkasan materi kuliah tentang dunia sistem informasi yang semoga bermanfaat bagi pembaca.
+                    </p>
+                    <div class="bg-muted p-4 rounded-lg">
+                        <h3 class="font-semibold text-lg mb-2">Pendidikan</h3>
+                        <ul class="list-disc list-inside space-y-1 text-foreground">
+                            <li>S1 Teknik Informatika - Universitas Dian Nuswantoro (2023-Sekarang)</li>
+                            <li>SMAN 2 Pemalang - Jurusan IPA (2020-2023)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Articles Section -->
+        <div id="articles-section" class="content-section max-w-4xl mx-auto space-y-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-xl font-bold text-foreground"> Data Governance and IT Architecture Support Long-Term Perfomance Data</h2>
+                    <p class="text-muted-foreground">Materi Minggu Pertama</p>
+                </div>
+                <div class="card-content">
+                    <p class="text-foreground mb-4">
+                        Data Governance and IT Architecture Support Long-Term Performance adalah konsep pengelolaan data dan perancangan arsitektur
+                        teknologi informasi yang bertujuan untuk memastikan data dalam organisasi dikelola dengan baik, aman, terintegrasi, serta digunakan secara efektif.
+                        Data governance berfokus pada aturan, standar, dan tanggung jawab dalam mengelola data, sedangkan IT architecture mengatur struktur sistem,
+                        aplikasi, dan infrastruktur agar saling mendukung. Keduanya berperan penting dalam menjaga kualitas informasi, memperlancar proses bisnis,
+                        serta meningkatkan kinerja organisasi secara berkelanjutan dalam jangka panjang.
+
+                    </p>
+                    <div class="bg-muted p-4 rounded-lg mt-4">
+                        <h4 class="font-semibold mb-2">Pada pertemuan pertama membahas pentingnya manajemen informasi, arsitektur data, dan governance dalam mendukung kinerja jangka panjang organisasi. Informasi yang berkualitas, akurat, dan terintegrasi sangat diperlukan untuk pengambilan keputusan. Namun, banyak perusahaan menghadapi masalah seperti data silos, data hilang, atau format data yang tidak standar, sehingga diperlukan tata kelola data (data governance) dan enterprise architecture untuk mengurangi hambatan tersebut serta meningkatkan kualitas keputusan bisnis.</h4>
+                        <h4 class="font-semibold mb-2">Selanjutnya, dijelaskan tentang sistem informasi yang berperan mengubah data mentah menjadi informasi dan pengetahuan yang mendukung proses bisnis. Sistem ini meliputi Transaction Processing System (TPS), Management Information System (MIS), Decision Support System (DSS), hingga Data Warehouse yang digunakan untuk analisis jangka panjang. Sistem tersebut sangat penting dalam menghubungkan data, informasi, serta strategi bisnis agar organisasi dapat berjalan lebih efektif.</h4>
+                        <h4 class="font-semibold mb-2">Bagian akhir membahas data center, cloud computing, virtualization, serta layanan cloud yang menambah kelincahan (agility) bisnis. Data center menjadi “rumah” bagi data, cloud computing menyediakan layanan fleksibel (SaaS, PaaS, IaaS, DaaS), dan virtualisasi memungkinkan satu server digunakan untuk banyak mesin virtual. Layanan cloud membawa manfaat besar seperti skalabilitas, efisiensi biaya, dan fleksibilitas, namun juga memiliki risiko seperti ketergantungan pada vendor, isu keamanan data, serta pelanggaran privasi yang harus diantisipasi dengan tata kelola dan perjanjian hukum yang tepat.</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-xl font-bold text-foreground">Data Management, Big Data Analytics, and Records Management</h2>
+                    <p class="text-muted-foreground">Materi Minggu Kedua</p>
+                </div>
+                <div class="bg-muted p-4 rounded-lg mt-4">
+                        <h4 class="font-semibold mb-2">Pengertian</h4>
+                        <ul class="list-disc list-inside space-y-1 text-foreground">
+                            <li>Data Management adalah proses mengumpulkan, menyimpan, mengatur, dan menjaga data agar tetap akurat, aman, serta mudah diakses untuk mendukung kebutuhan bisnis maupun pengambilan keputusan.</li>
+                            <li>Big Data Analytics adalah teknik menganalisis data dalam jumlah besar, beragam, dan kompleks untuk menemukan pola, tren, serta wawasan yang dapat digunakan sebagai dasar strategi bisnis atau inovasi.</li>
+                            <li>Records Management adalah pengelolaan dokumen atau catatan organisasi (fisik maupun digital) sejak dibuat, digunakan, disimpan, hingga dimusnahkan, agar tetap teratur, aman, dan sesuai aturan hukum atau kebijakan.</li>
+                        </ul>
+                    </div>
+                <div class="card-content">
+                    <p class="text-foreground mb-4">
+                       Pada pertemuan kedua ini membahas Data Management, Big Data Analytics, dan Records Management sebagai fondasi penting
+                       dalam pengelolaan informasi perusahaan. Database dan data warehouse berperan menyimpan serta mengolah data agar konsisten,
+                       akurat, dan siap digunakan untuk analisis maupun pengambilan keputusan strategis. Kualitas data menjadi faktor utama dalam
+                       meningkatkan kinerja sistem dan efektivitas bisnis. Selain itu, big data analytics memanfaatkan teknologi seperti Hadoop,
+                       IoT, serta metode data mining dan text mining untuk menemukan pola, tren, dan wawasan baru yang dapat meningkatkan daya saing organisasi.
+                    </p>
+                    <p>Selanjutnya, materi menjelaskan peran Business Intelligence (BI) dalam mengintegrasikan data, teknologi, dan analisis
+                        guna mendukung keputusan yang cepat, tepat, serta efisien. BI membantu organisasi memahami apa yang terjadi (deskriptif)
+                        dan apa yang sebaiknya dilakukan (prediktif). Di sisi lain, Electronic Records Management (ERM) menekankan pentingnya pengelolaan
+                        arsip digital sesuai standar hukum dan prinsip akuntabilitas, integritas, hingga keamanan data. ERM memberikan manfaat berupa akses cepat,
+                        efisiensi, perlindungan data, serta kepatuhan regulasi, sehingga mendukung keberlanjutan dan tata kelola perusahaan yang baik.
+                        kumpulan warehouse bisa jadi data set (data awal)
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-xl font-bold text-foreground">Cybersecurity and Risk Manajement</h2>
+                    <p class="text-muted-foreground">Materi Minggu Ketiga</p>
+                </div>
+                <div class="card-content">
+                    <p class="text-foreground mb-4">
+                        Cybersecurity and Risk Management membahas peningkatan ancaman siber yang semakin kompleks seperti Advanced Persistent Threats (APT)
+                        yang menargetkan sektor teknologi, keuangan, dan ritel. Dengan sistem yang semakin terhubung (cloud, mobile, BYOD), pertahanan tradisional tidak
+                        lagi cukup, sehingga organisasi perlu menerapkan pendekatan proaktif melalui pemantauan berkelanjutan, pelatihan keamanan, serta rencana pemulihan insiden.
+                        Fokus utama dalam manajemen risiko siber adalah mengidentifikasi, menilai, dan mengurangi risiko terhadap aset penting dengan prinsip CIA (Confidentiality,
+                        Integrity, Availability) serta penggunaan kontrol seperti firewall, enkripsi, autentikasi, dan sistem deteksi intrusi.
+                    </p>
+                    <p>Selain itu, materi menekankan pentingnya compliance dan internal control melalui pencegahan, deteksi dini, pemulihan, dan kesadaran terhadap ancaman
+                        untuk menjaga keberlangsungan bisnis. Keamanan pada aplikasi, mobile, dan cloud juga perlu dijaga dengan autentikasi biometrik, pemantauan aplikasi berbahaya,
+                        serta pembaruan sistem secara rutin. Upaya pencegahan fraud dilakukan melalui audit internal, kontrol ketat, edukasi etika, dan pemantauan perilaku untuk
+                        memastikan integritas serta mencegah kerugian data maupun finansial.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-xl font-bold text-foreground">Attracting Buyers with Search, Semantic, and Recommendation Technology</h2>
+                    <h2 class="text-xl font-bold text-foreground">Social Networking, Engagement, and Social Metrics </h2>
+                    <p class="text-muted-foreground">Materi Minggu Keempat</p>
+                </div>
+                <div class="card-content">
+                    <p class="text-foreground mb-4">
+                        Bab 6 membahas bagaimana teknologi pencarian, semantik, dan sistem rekomendasi membantu bisnis menarik pembeli dan meningkatkan penjualan.
+                        Teknologi pencarian (search technology) memungkinkan pelanggan menemukan produk atau layanan dengan cepat, sedangkan SEO dan PPC meningkatkan
+                        visibilitas di hasil pencarian. Teknologi semantik membuat mesin pencari lebih memahami konteks dan makna kata, menghasilkan hasil yang lebih relevan.
+                        Sementara itu, recommendation engines mempersonalisasi pengalaman pengguna dengan memberikan saran produk yang sesuai dengan preferensi mereka,
+                        meningkatkan loyalitas dan potensi pembelian.
+                    </p>
+                    <p>Bab 7 menjelaskan peran jejaring sosial (Web 2.0) dalam membangun keterlibatan dan komunikasi dua arah antara bisnis dan konsumen.
+                        Media sosial, blog, dan microblog digunakan untuk menciptakan engagement, sementara mashups dan social metrics membantu mengukur efektivitas strategi digital.
+                        Selain itu, penerapan alat kolaboratif seperti Slack atau Wiki di lingkungan kerja sosial mendorong berbagi pengetahuan dan inovasi antar karyawan,
+                        menjadikan organisasi lebih adaptif dan efisien dalam era digital.
+
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-xl font-bold text-foreground">Teknologi Ritel E-Commerce dan Perdagangan Seluler</h2>
+                    <p class="text-muted-foreground">Materi Minggu kelima</p>
+                </div>
+                <div class="card-content">
+                    <p class="text-foreground mb-4">
+                       Materi ini membahas bagaimana teknologi digital mengubah dunia ritel modern,
+                       khususnya melalui e-commerce dan perdagangan seluler. Perubahan perilaku konsumen seperti
+                       kemudahan membandingkan harga, membaca ulasan, hingga berbelanja lewat ponsel menjadi tantangan
+                       besar bagi retailer tradisional. Untuk bertahan, retailer perlu memahami sikap konsumen yang
+                       menuntut kecepatan, kemudahan, dan fleksibilitas lintas kanal. Strategi omni-channel retailing
+                       menjadi solusi utama dengan mengintegrasikan toko fisik, website, aplikasi, dan media sosial agar
+                       pengalaman belanja terasa menyatu dan konsisten.
+                    </p>
+                    <p> E-commerce (B2C dan B2B) serta mobile commerce beserta penerapannya, seperti marketplace,
+                        e-procurement, mobile marketing, dan mobile payment. Mobile payment dan mobile banking memberikan
+                        kemudahan transaksi kapan saja dan di mana saja, meningkatkan efisiensi serta pengalaman pelanggan,
+                        meskipun tetap memiliki risiko keamanan yang perlu diantisipasi. Secara keseluruhan, masa depan bisnis
+                        ritel dan perdagangan digital bergantung pada kemampuan adaptasi teknologi, integrasi sistem, dan fokus pada kebutuhan pelanggan.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-xl font-bold text-foreground">Strategic Teknology And Enterprise System</h2>
+                    <p class="text-muted-foreground">Materi Minggu keenam</p>
+                </div>
+                <div class="card-content">
+                    <p class="text-foreground mb-4">
+                       Sistem informasi membantu manajemen mengolah data menjadi informasi yang akurat,
+                       relevan, dan tepat waktu sehingga dapat digunakan untuk perencanaan, pengendalian, dan evaluasi.
+                       Dengan dukungan teknologi, proses bisnis menjadi lebih efisien, terstruktur, dan mampu merespons
+                       perubahan lingkungan bisnis yang dinamis.
+                    </p>
+                    <p> 
+                        Pentingnya pemanfaatan sistem informasi secara strategis agar organisasi memiliki keunggulan bersaing.
+                        Penerapan sistem yang terintegrasi memungkinkan koordinasi antar bagian, peningkatan kualitas keputusan,
+                        serta pengurangan risiko kesalahan. Secara keseluruhan, sistem informasi bukan hanya alat operasional,
+                        tetapi juga komponen penting dalam strategi dan keberhasilan jangka panjang organisasi.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div id="contact-section" class="content-section max-w-2xl mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-xl font-bold text-foreground">Hubungi Saya</h2>
+                    <p class="text-muted-foreground">Silahkan menghubungi saya untuk diskusi tentang Sistem Informasi</p>
+                </div>
+                <div class="card-content space-y-4">
+                    <div class="space-y-2">
+                        <h3 class="font-semibold text-lg">Informasi Kontak</h3>
+                        <p class="text-foreground">Email: 111202315076@mhs.dinus.ac.id</p>
+                        <p class="text-foreground">Instagram: nsrnzlf26</p>
+                        <p class="text-foreground">Nomor WhastApp: 085931425259</p>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <img 
+                            src="waSaya.jpg" 
+                            alt="Ilustrasi kontak dengan ikon email dan simbol komunikasi" 
+                            class="w-full h-auto rounded-lg"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-muted py-6 px-4 mt-12 border-t border-border">
+        <div class="container mx-auto text-center">
+            <p class="text-muted-foreground">
+                © 2025 Blog Pribadi Nisrina Zulfa. All rights reserved.
+            </p>
+            <p class="text-muted-foreground text-sm mt-2">
+                Dibuat dengan ❤️ untuk berbagi ilmu Sistem Informasi
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Update button styles
+            const buttons = ['profile', 'articles', 'contact'];
+            buttons.forEach(btn => {
+                const button = document.getElementById(`btn-${btn}`);
+                if (btn === tabName) {
+                    button.classList.remove('btn-outline');
+                    button.classList.add('btn-default');
+                } else {
+                    button.classList.remove('btn-default');
+                    button.classList.add('btn-outline');
+                }
+            });
+
+            // Show selected section
+            const selectedSection = document.getElementById(`${tabName}-section`);
+            if (selectedSection) {
+                selectedSection.classList.add('active');
+            }
+        }
+
+        // Initialize with profile tab active
+        switchTab('profile');
+    </script>
+</body>
+</html>
